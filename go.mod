@@ -2,7 +2,10 @@ module github.com/Styre79/skbot
 
 go 1.21.3
 
-require github.com/spf13/cobra v1.8.0
+require (
+	github.com/spf13/cobra v1.8.0
+	gopkg.in/telebot.v3 v3.2.1
+)
 
 require (
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
