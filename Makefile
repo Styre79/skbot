@@ -16,17 +16,17 @@ lint:
 test:
 	go test -v
 
-build: format get
+build: get format
 	CGO_ENABLED=0 GOOS=${TARGETOS} GOARCH=${shell dpkg --print-architecture} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
 
 linux: format get 
-	CGO_ENABLED=0 GOOS=linux GOARCH=${shell dpkg --print-architecture} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
+	CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
 
 windows: format get
-	CGO_ENABLED=0 GOOS=windows GOARCH=${shell dpkg --print-architecture} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
+	CGO_ENABLED=0 GOOS=windows GOARCH=${TARGETARCH} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
 
 mac: format get
-	CGO_ENABLED=0 GOOS=darwin GOARCH=${shell dpkg --print-architecture} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
+	CGO_ENABLED=0 GOOS=darwin GOARCH=${TARGETARCH} go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
 
 arm: format get
 	CGO_ENABLED=0 GOOS=${shell uname | tr '[:upper:]' '[:lower:]'} GOARCH=arm64 go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
@@ -39,3 +39,4 @@ push:
 
 clean:
 	rm -rf skbot
+	docker rmi -f $(shell docker images -q ${REGISTRY}/${APP})
