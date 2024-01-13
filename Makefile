@@ -1,5 +1,6 @@
 APP=$(shell basename $(shell git remote get-url origin))
-REGISTRY=gcr.io/devops-intensive-w3
+# REGISTRY=gcr.io/devops-intensive-w3
+REGISTRY=styre79/skbot
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
 TARGETOS=$(shell uname | tr '[:upper:]' '[:lower:]') #linux darwin windows
 TARGETARCH=$(shell dpkg --print-architecture) #amd64 #arm64
