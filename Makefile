@@ -41,7 +41,7 @@ image:
 
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
+	docker push ${TAG}
 
 clean:
 	rm -rf skbot
