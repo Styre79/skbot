@@ -5,12 +5,16 @@
 replicaCount: 1
 
 image:
-  repository: "styre79"
-  tag: "v1.0.2-87f1c09"
+  registry: "ghcr.io"
+  repository: "styre79/skbot"
+  tag: "v1.0.3-8b06d09"
+  os: linux
   arch: amd64
+
 secret:
   name: "skbot"
   env: "TELE_TOKEN"
   key: "token"
+
 securityContext:
   privileged: true
