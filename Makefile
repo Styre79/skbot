@@ -3,8 +3,9 @@ APP=$(shell basename $(shell git remote get-url origin))
 # REGISTRY=styre79
 REGISTRY=ghcr.io/styre79
 VERSION=$(shell git describe --tags --abbrev=0)-$(shell git rev-parse --short HEAD)
-TARGETOS=$(shell uname | tr '[:upper:]' '[:lower:]') #linux darwin windows
-TARGETARCH=$(shell dpkg --print-architecture) #amd64 #arm64
+TARGETOS=$(shell uname | tr '[:upper:]' '[:lower:]')# | tr -d '[:space:]') #linux darwin windows
+TARGETARCH=$(shell dpkg --print-architecture) #| tr -d '[:space:]') #amd64 #arm64
+TAG=${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 format:
 	gofmt -s -w ./
@@ -33,11 +34,14 @@ mac: format get
 arm: format get
 	CGO_ENABLED=0 GOOS=${shell uname | tr '[:upper:]' '[:lower:]'} GOARCH=arm64 go build -v -o skbot -ldflags "-X="github.com/Styre79/skbot/cmd.appVersion=${VERSION}
 
+
 image:
-	docker build . -t ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	@echo ${TAG}
+	docker build . -t ${TAG}
+
 
 push:
-	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETARCH}
+	docker push ${REGISTRY}/${APP}:${VERSION}-${TARGETOS}-${TARGETARCH}
 
 clean:
 	rm -rf skbot
