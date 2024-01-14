@@ -3,18 +3,15 @@
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-
 image:
   registry: "ghcr.io"
   repository: "styre79/skbot"
-  tag: "v1.0.3-8b06d09"
+  tag: "v1.0.3-3517d60"
   os: linux
   arch: amd64
-
 secret:
   name: "skbot"
   env: "TELE_TOKEN"
   key: "token"
-
 securityContext:
   privileged: true
