@@ -5,7 +5,7 @@
 replicaCount: 1
 image:
   repository: "styre79"
-  tag: "v1.0.3-bd550b4"
+  tag: "v1.0.3-f8b3a5c"
   arch: amd64
 secret:
   name: "skbot"
